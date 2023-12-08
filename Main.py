@@ -30,18 +30,18 @@ def autho():
 
 
 def authorization_in(user_name, password):
-    users_path = '/Users/valeria/Desktop/mipt study/CoronaVirus-main/users.csv'
+    users_path = 'users.csv'
     names_and_words = pd.read_csv(users_path)
     if str(user_name) in list(names_and_words['user_name']):
         pass
     else:
         new_user = pd.DataFrame({'user_name': [str(user_name)], 'password': [str(password)]})
         names_and_words = pd.concat([names_and_words, new_user])
-        names_and_words.to_csv('/Users/valeria/Desktop/mipt study/CoronaVirus-main/users.csv', index=False)
+        names_and_words.to_csv(users_path, index=False)
 
 def update_stats(user_name, win=False):
     global stats_path
-    stats_path = '/Users/valeria/Desktop/mipt study/CoronaVirus-main/stats.csv'
+    stats_path = 'stats.csv'
     stats = pd.read_csv(stats_path)
     if str(user_name) in list(stats['user_name']):
         stats.loc[stats.user_name == str(user_name), ('number_of_games')] += 1
@@ -50,7 +50,7 @@ def update_stats(user_name, win=False):
     else:
         new_user = pd.DataFrame({'user_name': [str(user_name)], 'number_of_games': [0], 'number_of_wins': [0]})
         names_and_words = pd.concat([stats, new_user])
-        names_and_words.to_csv('/Users/valeria/Desktop/mipt study/CoronaVirus-main/stats.csv', index=False)
+        names_and_words.to_csv(stats_path, index=False)
     return int(stats[stats.user_name == str(user_name)]['number_of_games']), int(stats[stats.user_name == str(user_name)]['number_of_wins'])
 
 
